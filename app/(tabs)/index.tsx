@@ -1,19 +1,18 @@
-import { Image, StyleSheet, Platform, Text } from 'react-native';
-
-import { HelloWave } from '@/components/HelloWave';
+import { Image, StyleSheet, Text } from 'react-native';
 import ParallaxScrollView from '@/components/ParallaxScrollView';
-import { ThemedText } from '@/components/ThemedText';
-import { ThemedView } from '@/components/ThemedView';
 import dayjs from 'dayjs';
 import timezone from 'dayjs/plugin/timezone';
 import utc from 'dayjs/plugin/utc';
+import { convertTimestampToTimezone } from '@/utils/convert-time';
 
 dayjs.extend(utc);
 dayjs.extend(timezone);
 
 export default function HomeScreen() {
-  const a = dayjs(new Date(1384775720)).tz("America/Toronto").format("HH:mm:ss");
-  const b = dayjs(new Date(1384775720)).tz("Asia/Shanghai").format("HH:mm:ss");
+  const originalA = convertTimestampToTimezone(1746164993772, "America/Toronto");
+  const originalB = convertTimestampToTimezone(1746164993772, "Asia/Shanghai");
+  const a = dayjs(originalA).format("YYYY-MM-DD HH:mm:ss"); 
+  const b = dayjs(originalB).format("YYYY-MM-DD HH:mm:ss");
 
   return (
     <ParallaxScrollView
